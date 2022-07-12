@@ -1,0 +1,22 @@
+<h1>Testing</h1>
+
+<h2>Form</h2>
+<br>
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <input type="text"><br>
+    <input type="email"><br>
+    <input type="password"><br>
+    <button>
+        Register Here
+    </button>
+
+</form>
+
+<!-- In  creating the HTML elements, -->
+<!-- Form requires a name - as per #(#myForm) and will inherit the FormsModule traits - #myForm="ngForm"  -->
+<!-- the function created to handle the onSubmit function will be declared in the form trait too -->
+<!-- <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)"> - as seen here, -->
+    <!-- ngSubmit from FormsModule - requires a submit function - as created in formzcomponent (onSubmit) - which requires an arg -->
+    <!-- Therefore, written as this: (ngSubmit)="onSubmit(myForm)" -->
+
+    <!-- ngModel - exported by FormsModule, allows two way binding of data -->
