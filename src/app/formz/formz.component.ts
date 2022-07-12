@@ -1,31 +1,56 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { shareReplay, tap } from 'rxjs/operators';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-formz',
   templateUrl: './formz.component.html',
   styleUrls: ['./formz.component.css']
 })
-export class FormzComponent {
+export class FormzComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    this.data$ = http.get("http://localhost:3000/customers")
+    .pipe(tap(console.log), shareReplay()); // On ng serve, all data is viewable in the console through tap method!!!
+  // this binds the data storage in data$ to retrieve all data from GET request
+  // pipe method chained will attach another method to the GET request to print out all data from RESTful action
+  // shareReplay method restricts to only one call made
+   }
 
   firstName: string;
   email: string;
   password: string;
+
+  data$: Observable<any>;
+  // creating a data which will be a Observable property, the <any> will allow data to handle any type of data
 
   onSubmit(form: NgForm){
     this.http.post("http://localhost:3000/customers", form.value).subscribe();
     console.log(form.value)
   }
 
+  deleteMe(){
+    this.http.delete("http://localhost:3000/customers/1").subscribe();
+    console.log("deleted")
+  }
+
+    // ALTERNATIVELY CAN BE WRITTEN AS BELOW
+  // deleteMe(form: NgForm){
+  //   this.http.delete("http://localhost:3000/customers/1", form.value).subscribe();
+  //   console.log("delete me")
+  // }
+
   // onSubmit(form: NgForm) {
   //   console.log(form.value)
   // }
 
-
-  
+ngOnInit(): void {
+  this.data$.subscribe();
+}
+// Adding a subscription to data$
 
 
 }
@@ -56,3 +81,28 @@ export class FormzComponent {
     // this.http.post("http://localhost:3000/customers", form.value)
     // MUST CHAIN the subscribe() method at end of this syntax or wont work
     // subscribe() function defines how to obtain or generate values or messages to be published
+
+    // DELETE POST REQUEST
+    //    similiar syntax see above
+
+
+    // CACHING
+      // Where browser stores a local copy/resources for retrieval later on
+      // eg localStorage
+      // Purpose to decrease server call
+      // Caching with shreReplay method
+      // shareReplay works with observable methods
+      // Observable can have multiple subscribers
+      // Caching with shareReplay returns an observable with one subcriber
+      // Accepts buffersize as a parameter
+      // SYNTAX - shareReplay(CACHE_SIZE)
+// For caching, able to import directly to the file instead of importing module in parent app file
+// 
+
+// Import these two lines to start caching
+// import { Observable } from 'rxjs';
+// import { shareReplay, tap } from 'rxjs/operators';
+// Next, insert
+// data$: Observable<any>;
+// creates a data property as an observable that takes in any data types
+// Next, call inside the constructor 

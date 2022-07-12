@@ -7,7 +7,8 @@
     <input type="text" [(ngModel)]="firstName" name="first label" ><br>
     <input type="email" [(ngModel)]="email" name="second label"><br>
     <input type="password" [(ngModel)]="password" name="third label"><br>
-    <button [disabled]="!formName.form.valid">Register</button>
+    <button [disabled]="!formName.form.valid">Register</button><br><br>
+    <button (click)="deleteMe()">Delete Me</button><br>
 </form>
 </fieldset>
 
