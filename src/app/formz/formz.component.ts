@@ -1,6 +1,5 @@
 import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ValueFromArray } from 'rxjs';
 
 @Component({
   selector: 'app-formz',
@@ -13,9 +12,13 @@ export class FormzComponent {
   email: string;
   password: string;
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm){
     console.log(form.value)
   }
+
+  // onSubmit(form: NgForm) {
+  //   console.log(form.value)
+  // }
 
 
   constructor() { }
