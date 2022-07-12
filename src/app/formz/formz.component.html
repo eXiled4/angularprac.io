@@ -4,10 +4,10 @@
 <fieldset>
     <legend>This is a form</legend>
 <form #formName="ngForm" (ngSubmit)="onSubmit(formName)">
-    <input type="text" [(ngModel)]="firstName" name="first label" >
-    <input type="email" [(ngModel)]="email" name="second label">
-    <input type="password" [(ngModel)]="password" name="third label">
-    <button>Register</button>
+    <input type="text" [(ngModel)]="firstName" name="first label" ><br>
+    <input type="email" [(ngModel)]="email" name="second label"><br>
+    <input type="password" [(ngModel)]="password" name="third label"><br>
+    <button [disabled]="!formName.form.valid">Register</button>
 </form>
 </fieldset>
 
@@ -32,3 +32,5 @@
     <!-- Therefore, written as this: (ngSubmit)="onSubmit(myForm)" -->
 
     <!-- ngModel - exported by FormsModule, allows two way binding of data -->
+
+    <!-- Disabled syntax in button prevents submission of form if form values are invalid -->

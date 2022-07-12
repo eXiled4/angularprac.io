@@ -1,3 +1,10 @@
 {
-    "customers": []
+  "customers": [
+    {
+      "first label": "one",
+      "second label": "one@gmail.com",
+      "third label": "haha",
+      "id": 1
+    }
+  ]
 }
